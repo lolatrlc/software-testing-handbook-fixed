@@ -69,34 +69,18 @@ class SecurityTests {
     // ============== XSS PREVENTION TESTS ==============
 
     @Test
-    @DisplayName("Should prevent XSS - Script tags")
-    void testXssPrevention_ScriptTag() throws Exception {
-        String xssPayload = "<script>alert('XSS')</script>";
-
+    @DisplayName("Should prevent XSS ")
+    @ValueSource(strings = {
+            "<script>alert('XSS')</script>",
+            "<img src=x onerror=alert('XSS')>",
+            "javascript:alert('XSS')"
+    })
+    void testXssPrevention(String xssPayload) throws Exception {
         mockMvc.perform(get("/greeting")
-                .param("name", xssPayload))
+                        .param("name", xssPayload))
                 .andExpect(status().isBadRequest());
     }
-
-    @Test
-    @DisplayName("Should prevent XSS - Event handlers")
-    void testXssPrevention_EventHandler() throws Exception {
-        String xssPayload = "<img src=x onerror=alert('XSS')>";
-
-        mockMvc.perform(get("/greeting")
-                .param("name", xssPayload))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @DisplayName("Should prevent XSS - JavaScript protocol")
-    void testXssPrevention_JavaScriptProtocol() throws Exception {
-        String xssPayload = "javascript:alert('XSS')";
-
-        mockMvc.perform(get("/greeting")
-                .param("name", xssPayload))
-                .andExpect(status().isBadRequest());
-    }
+    
 
     // ============== COMMAND INJECTION PREVENTION TESTS ==============
 
