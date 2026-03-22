@@ -1,4 +1,4 @@
-package com.snhu.Module21;
+package com.snhu.module21;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

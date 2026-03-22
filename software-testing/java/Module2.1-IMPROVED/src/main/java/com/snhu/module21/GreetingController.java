@@ -1,4 +1,4 @@
-package com.snhu.Module21;
+package com.snhu.module21;
 
 import java.util.concurrent.atomic.AtomicLong;
 import jakarta.validation.constraints.Max;

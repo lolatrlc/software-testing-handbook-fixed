@@ -1,4 +1,4 @@
-package com.snhu.Module21.exception;
+package com.snhu.module21.exception;
 
 import jakarta.validation.ConstraintViolationException;
 import java.util.LinkedHashMap;

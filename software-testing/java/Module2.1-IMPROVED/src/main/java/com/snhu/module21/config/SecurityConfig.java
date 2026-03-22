@@ -1,4 +1,4 @@
-package com.snhu.Module21.config;
+package com.snhu.module21.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

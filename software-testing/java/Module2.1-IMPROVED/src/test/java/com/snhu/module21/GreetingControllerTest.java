@@ -1,4 +1,4 @@
-package com.snhu.Module21;
+package com.snhu.module21;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
