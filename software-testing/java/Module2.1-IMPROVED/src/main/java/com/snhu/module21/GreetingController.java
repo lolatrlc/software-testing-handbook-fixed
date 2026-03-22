@@ -95,7 +95,7 @@ public class GreetingController {
         // SECURE: Direct string formatting without expression evaluation
         Greeting greeting = new Greeting(
             counter.incrementAndGet(),
-            String.format(template, sanitizedName)
+            String.format(TEMPLATE, sanitizedName)
         );
 
         return ResponseEntity.ok(greeting);
@@ -150,7 +150,7 @@ public class GreetingController {
 
         Greeting greeting = new Greeting(
             counter.incrementAndGet(),
-            String.format(template, message)
+            String.format(TEMPLATE, message)
         );
 
         return ResponseEntity.ok(greeting);
