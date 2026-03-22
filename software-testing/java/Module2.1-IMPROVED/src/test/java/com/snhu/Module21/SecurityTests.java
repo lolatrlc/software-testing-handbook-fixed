@@ -30,46 +30,19 @@ class SecurityTests {
     // ============== SPEL INJECTION PREVENTION TESTS ==============
 
     @Test
-    @DisplayName("Should prevent SpEL injection - Runtime.exec attempt")
-    void testSpelInjectionPrevention_RuntimeExec() throws Exception {
-        // This would execute code in vulnerable version
-        String spelPayload = "T(java.lang.Runtime).getRuntime().exec('calc')";
-
+    @DisplayName("Should prevent SpEL injection")
+    @ValueSource(strings={
+            "T(java.lang.Runtime).getRuntime().exec('calc')",
+            "T(java.lang.System).getProperty('user.home')",
+            "T(java.lang.Class).forName('java.lang.Runtime')",
+            "${7*7}"
+    })
+    void testSpelInjectionPrevention(string spelPayload) throws Exception {
         mockMvc.perform(get("/greeting")
                 .param("name", spelPayload))
                 .andExpect(status().isBadRequest()); // Rejected by validation
     }
 
-    @Test
-    @DisplayName("Should prevent SpEL injection - System property access")
-    void testSpelInjectionPrevention_SystemProperty() throws Exception {
-        // This would leak system properties in vulnerable version
-        String spelPayload = "T(java.lang.System).getProperty('user.home')";
-
-        mockMvc.perform(get("/greeting")
-                .param("name", spelPayload))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @DisplayName("Should prevent SpEL injection - Class loading attempt")
-    void testSpelInjectionPrevention_ClassLoading() throws Exception {
-        String spelPayload = "T(java.lang.Class).forName('java.lang.Runtime')";
-
-        mockMvc.perform(get("/greeting")
-                .param("name", spelPayload))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @DisplayName("Should prevent SpEL injection - Expression in brackets")
-    void testSpelInjectionPrevention_Expression() throws Exception {
-        String spelPayload = "${7*7}";
-
-        mockMvc.perform(get("/greeting")
-                .param("name", spelPayload))
-                .andExpect(status().isBadRequest());
-    }
 
     // ============== SQL INJECTION PREVENTION TESTS ==============
 
