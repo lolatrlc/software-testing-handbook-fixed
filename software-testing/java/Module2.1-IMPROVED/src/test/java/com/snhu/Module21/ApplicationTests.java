@@ -28,5 +28,9 @@ class ApplicationTests {
     void applicationStartsWithSecurityConfig() {
         // Verifies that SecurityConfig is loaded and applied
         // The context load itself validates this
+
+        SecurityFilterChain filterChain = context.getBean(SecurityFilterChain.class);
+        assertNotNull(filterChain, "Filter needs to be configurate")
+
     }
 }
