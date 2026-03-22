@@ -21,7 +21,7 @@ public class Application {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    private static final EQUAL_SIGN_WRITTEN = "======================================"
+    private static final EQUAL_SIGN_WRITTEN = "======================================";
 
     public static void main(String[] args) {
         // SECURE IMPLEMENTATION: Simple logging without expression evaluation
