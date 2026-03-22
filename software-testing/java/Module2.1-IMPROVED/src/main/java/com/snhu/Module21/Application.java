@@ -24,14 +24,6 @@ public class Application {
     private static final EQUAL_SIGN_WRITTEN = "======================================"
 
     public static void main(String[] args) {
-        // SECURITY FIX: Removed vulnerable SpEL parser code
-        // The original code used SpelExpressionParser which could lead to RCE
-        // OLD VULNERABLE CODE (REMOVED):
-        // ExpressionParser parser = new SpelExpressionParser();
-        // Expression exp = parser.parseExpression("'Hello World'");
-        // String message = (String) exp.getValue();
-        // System.out.println(message);
-
         // SECURE IMPLEMENTATION: Simple logging without expression evaluation
         logger.info(EQUAL_SIGN_WRITTEN);
         logger.info("Starting Module 2.1 - SECURE VERSION");
