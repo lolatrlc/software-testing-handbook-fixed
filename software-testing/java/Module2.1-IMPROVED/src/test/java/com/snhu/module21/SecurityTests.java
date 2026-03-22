@@ -96,7 +96,7 @@ class SecurityTests {
                         .param("name", cmdPayload))
                 .andExpect(status().isBadRequest());
     }
-    
+
     // ============== PATH TRAVERSAL PREVENTION TESTS ==============
 
     @Test
