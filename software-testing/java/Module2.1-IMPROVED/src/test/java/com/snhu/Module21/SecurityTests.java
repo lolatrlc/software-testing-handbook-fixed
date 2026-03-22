@@ -80,40 +80,23 @@ class SecurityTests {
                         .param("name", xssPayload))
                 .andExpect(status().isBadRequest());
     }
-    
+
 
     // ============== COMMAND INJECTION PREVENTION TESTS ==============
 
     @Test
     @DisplayName("Should prevent command injection - Pipe character")
-    void testCommandInjectionPrevention_Pipe() throws Exception {
-        String cmdPayload = "test | ls -la";
-
+    @ValueSource(strings = {
+            "test | ls -la",
+            "test; rm -rf /",
+            "`whoami`"
+    })
+    void testCommandInjectionPrevention(String cmdPayload) throws Exception {
         mockMvc.perform(get("/greeting")
-                .param("name", cmdPayload))
+                        .param("name", cmdPayload))
                 .andExpect(status().isBadRequest());
     }
-
-    @Test
-    @DisplayName("Should prevent command injection - Semicolon")
-    void testCommandInjectionPrevention_Semicolon() throws Exception {
-        String cmdPayload = "test; rm -rf /";
-
-        mockMvc.perform(get("/greeting")
-                .param("name", cmdPayload))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @DisplayName("Should prevent command injection - Backticks")
-    void testCommandInjectionPrevention_Backticks() throws Exception {
-        String cmdPayload = "`whoami`";
-
-        mockMvc.perform(get("/greeting")
-                .param("name", cmdPayload))
-                .andExpect(status().isBadRequest());
-    }
-
+    
     // ============== PATH TRAVERSAL PREVENTION TESTS ==============
 
     @Test
