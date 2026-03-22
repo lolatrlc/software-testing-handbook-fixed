@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 public class GreetingController {
 
     private static final Logger logger = LoggerFactory.getLogger(GreetingController.class);
-    private static final String template = "Hello, %s!";
+    private static final String TEMPLATE = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
     /**
